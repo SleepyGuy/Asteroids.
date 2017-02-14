@@ -13,16 +13,11 @@ namespace Engine
 
 		void Drawable2D::Draw(unsigned int mode, std::vector<Math::Vector2> points)
 		{
-			// Reset transformation matrix to identity
-			//
+			
 			glLoadIdentity();
-
-			// Translate
-			//
+			
 			glTranslatef(m_position.GetX(), m_position.GetY(), 0.0f);
 
-			// Draw
-			//
 			glBegin(mode);
 				for(auto point : points)
 				{
