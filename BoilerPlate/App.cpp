@@ -114,17 +114,20 @@ namespace Engine
 		switch (keyBoardEvent.keysym.scancode)
 		{
 		case SDL_SCANCODE_W:
-			std::cout << "You are pressing W\n";
+			std::cout << "Moving up W\n";
 			m_entities[m_currentIndex]->MoveUp();
 			break;
 		case SDL_SCANCODE_A:
-			std::cout << "You are pressing A\n";
+			std::cout << "Moving Left A\n";
+			m_entities[m_currentIndex]->MoveLeft();
 			break;
 		case SDL_SCANCODE_S:
-			std::cout << "You are pressing S\n";
+			std::cout << "Moving Down S S\n";
+			m_entities[m_currentIndex]->MoveDown();
 			break;
 		case SDL_SCANCODE_D:
-			std::cout << "You are pressing D\n";
+			std::cout << "Moving Right D\n";
+			m_entities[m_currentIndex]->MoveRight();
 			break;
 		default:			
 			//SDL_Log("%S was pressed.", keyBoardEvent.keysym.scancode);
