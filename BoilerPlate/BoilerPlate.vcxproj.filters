@@ -47,6 +47,9 @@
     <ClInclude Include="Drawable2D.hpp">
       <Filter>Engine\Header files\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>Engine\Header files\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

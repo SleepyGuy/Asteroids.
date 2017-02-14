@@ -18,6 +18,8 @@ namespace Engine
 			
 			glTranslatef(m_position.GetX(), m_position.GetY(), 0.0f);
 
+			glRotatef(m_angle, 0.0f, 0.0f, 1.0f);
+
 			glBegin(mode);
 				for(auto point : points)
 				{

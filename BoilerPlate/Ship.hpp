@@ -9,6 +9,7 @@
 #include "Vector2.hpp"
 #include "Entity.hpp"
 
+
 namespace Asteroids
 {
 	namespace Entities
@@ -31,6 +32,7 @@ namespace Asteroids
 			void Draw();
 		private:
 			std::vector<Engine::Math::Vector2> m_points;
+			
 		};
 	}
 }

@@ -188,6 +188,7 @@ XCOPY "$(SolutionDir)\BoilerPlate\models" "$(TargetDir)\models" /i /s /Y</Comman
   <ItemGroup>
     <ClInclude Include="App.hpp" />
     <ClInclude Include="Configuration.hpp" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="Drawable2D.hpp" />
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="SDLEvent.hpp" />
