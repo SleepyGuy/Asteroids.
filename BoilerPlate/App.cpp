@@ -1,10 +1,18 @@
 #include "App.hpp"
+
 #include <iostream>
 #include <algorithm>
 
 // OpenGL includes
 #include <GL/glew.h>
 #include <SDL2/SDL_opengl.h>
+
+#include <fstream>
+#include <sstream>
+#include <string>
+
+//
+#include "Configuration.hpp"
 
 namespace Engine
 {
@@ -18,6 +26,7 @@ namespace Engine
 		, m_nUpdates(0)
 		, m_timer(new TimeManager)
 		, m_mainWindow(nullptr)
+		, m_currentIndex(0)
 	{
 		m_state = GameState::UNINITIALIZED;
 		m_lastFrameTime = m_timer->GetElapsedTimeInSeconds();
@@ -25,6 +34,17 @@ namespace Engine
 
 	App::~App()
 	{
+		// Delete entities
+		//
+		for (auto entity : m_entities)
+		{
+			delete entity;
+		}
+
+		// Clear list
+		//
+		m_entities.clear();
+
 		CleanupSDL();
 	}
 
@@ -73,15 +93,44 @@ namespace Engine
 		//
 		m_state = GameState::INIT_SUCCESSFUL;
 
+		// Loading models
+		//
+		Asteroids::Utilities::Configuration config;
+		m_entities = config.LoadModels();
+
 		return true;
 	}
 
 	void App::OnKeyDown(SDL_KeyboardEvent keyBoardEvent)
 	{		
+
+		/* 
+		 * W (UP)
+		 * A (LEFT)
+		 * S (DOWN)
+		 * D (RIGHT)
+		 */
+
 		switch (keyBoardEvent.keysym.scancode)
 		{
+		case SDL_SCANCODE_W:
+			std::cout << "You are pressing W\n";
+			m_entities[m_currentIndex]->MoveUp();
+			break;
+		case SDL_SCANCODE_A:
+			std::cout << "You are pressing A\n";
+			break;
+		case SDL_SCANCODE_S:
+			std::cout << "You are pressing S\n";
+			break;
+		case SDL_SCANCODE_D:
+			std::cout << "You are pressing D\n";
+			break;
 		default:			
-			SDL_Log("%S was pressed.", keyBoardEvent.keysym.scancode);
+			//SDL_Log("%S was pressed.", keyBoardEvent.keysym.scancode);
+			SDL_Log("Physical %s key acting as %s key",
+				SDL_GetScancodeName(keyBoardEvent.keysym.scancode),
+				SDL_GetKeyName(keyBoardEvent.keysym.sym));
 			break;
 		}
 	}
@@ -90,6 +139,27 @@ namespace Engine
 	{
 		switch (keyBoardEvent.keysym.scancode)
 		{
+		case SDL_SCANCODE_W:
+			std::cout << "You are releasing W\n";
+			break;
+		case SDL_SCANCODE_A:
+			std::cout << "You are releasing A\n";
+			break;
+		case SDL_SCANCODE_S:
+			std::cout << "You are releasing S\n";
+			break;
+		case SDL_SCANCODE_D:
+			std::cout << "You are releasing D\n";
+			break;
+		case SDL_SCANCODE_P:
+			m_currentIndex++;
+			if (m_currentIndex > (m_entities.size() - 1))
+			{
+				m_currentIndex = 0;
+			}
+
+			std::cout << m_currentIndex << std::endl;
+			break;
 		case SDL_SCANCODE_ESCAPE:
 			OnExit();
 			break;
@@ -127,12 +197,8 @@ namespace Engine
 		glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glBegin(GL_LINE_LOOP);
-		glVertex2f(150.0f, 0.0f);
-		glVertex2f(0.0f, 150.0f);
-		glVertex2f(-150.0f, 0.0f);
-		glVertex2f(0.0f, -150.0f);
-		glEnd();
+		//
+		m_entities[m_currentIndex]->Draw();
 
 		SDL_GL_SwapWindow(m_mainWindow);
 	}
@@ -242,8 +308,8 @@ namespace Engine
 		//
 		m_state = GameState::QUIT;
 
-		// Cleanup SDL pointers
+		// Stop the timer
 		//
-		CleanupSDL();
+		m_timer->Stop();
 	}
 }
