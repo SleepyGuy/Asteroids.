@@ -16,8 +16,8 @@ namespace Asteroids
 		void Ship::MoveUp()
 		{
 			Engine::Math::Vector2 velocity(
-				std::cosf((m_angle + ANGLE_OFFSET) * (Engine::Math::PI / 180)),
-				std::sinf((m_angle + ANGLE_OFFSET) * (Engine::Math::PI / 180))
+				8*std::cosf((m_angle + ANGLE_OFFSET) * (Engine::Math::PI / 180)),
+				8*std::sinf((m_angle + ANGLE_OFFSET) * (Engine::Math::PI / 180))
 			);
 			Engine::Math::Vector2 newPos =
 				m_position + velocity;
@@ -26,7 +26,10 @@ namespace Asteroids
 		}
 		void Ship::MoveDown()
 		{
-			Engine::Math::Vector2 velocity = Engine::Math::Vector2(0,-1);
+			Engine::Math::Vector2 velocity(
+				-8 * std::cosf((m_angle + ANGLE_OFFSET) * (Engine::Math::PI / 180)),
+				-8 * std::sinf((m_angle + ANGLE_OFFSET) * (Engine::Math::PI / 180))
+			);
 			Engine::Math::Vector2 newPos =
 				m_position + velocity;
 
