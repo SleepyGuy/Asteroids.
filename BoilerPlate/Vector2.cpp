@@ -36,6 +36,16 @@ namespace Engine
 			return std::sqrt(m_x * m_x + m_y * m_y);
 		}
 
+		void Vector2::setX(float x)
+			{
+			    m_x = x;
+			};
+		
+		void Vector2::setY(float y)
+			{
+			    m_y = y;
+			};
+
 		float Vector2::SquaredLength()
 		{
 			return m_x * m_x + m_y * m_y;

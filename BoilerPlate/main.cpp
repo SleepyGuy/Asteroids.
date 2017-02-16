@@ -11,8 +11,8 @@
 #include "App.hpp"
 #include "Utilities.hpp"
 
-const int WIDTH = 1136;
-const int HEIGHT = 640;
+const int WIDTH = 1280;
+const int HEIGHT = 720;
 
 int main(int argc, char* argv[])
 {

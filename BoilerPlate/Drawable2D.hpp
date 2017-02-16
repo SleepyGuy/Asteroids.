@@ -17,6 +17,7 @@ namespace Engine
 		public:
 			virtual void Translate(Math::Vector2 position);
 			virtual void Draw(unsigned int mode, std::vector<Math::Vector2> points);
+			virtual void Tranzwarp();
 		protected:
 			Engine::Math::Vector2 m_position;
 			float m_angle;
