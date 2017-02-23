@@ -13,11 +13,14 @@
 
 //
 #include "Configuration.hpp"
+#include "Entity.hpp"
+
 
 namespace Engine
 {
-	const float DESIRED_FRAME_RATE = 60.0f;
+	const float DESIRED_FRAME_RATE = 120.0f;
 	const float DESIRED_FRAME_TIME = 1.0f / DESIRED_FRAME_RATE;
+	bool stop = true;
 
 	App::App(const std::string& title, const int width, const int height)
 		: m_title(title)
@@ -122,8 +125,7 @@ namespace Engine
 			m_entities[m_currentIndex]->MoveLeft();
 			break;
 		case SDL_SCANCODE_S:
-			std::cout << "Moving Down S S\n";
-			m_entities[m_currentIndex]->MoveDown();
+			
 			break;
 		case SDL_SCANCODE_D:
 			std::cout << "Moving Right D\n";
@@ -178,6 +180,7 @@ namespace Engine
 
 		// Update code goes here
 		//
+		m_entities[m_currentIndex]->update(DESIRED_FRAME_RATE);
 
 		double endTime = m_timer->GetElapsedTimeInSeconds();
 		double nextTimeFrame = startTime + DESIRED_FRAME_TIME;

@@ -23,8 +23,8 @@ namespace Engine
 			float SquaredLength();
 			const float GetX();
 			const float GetY();
-			void setX(float x);
-			void setY(float y);
+			const float getLength();
+			
 
 			/*
 			 * OPERATORS

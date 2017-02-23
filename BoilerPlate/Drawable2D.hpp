@@ -1,7 +1,7 @@
 #pragma once
 #ifndef _DRAWABLE2D_H_
 #define _DRAWABLE2D_H_
-
+#include <iostream>
 // STDLIB
 #include <vector>
 
@@ -12,15 +12,21 @@ namespace Engine
 {
 	namespace Graphics
 	{
+		const float ANGLE_OFFSET = 90.0f;
 		class Drawable2D
 		{
 		public:
-			virtual void Translate(Math::Vector2 position);
+			
+			virtual void Translate(Engine::Math::Vector2 pos);
 			virtual void Draw(unsigned int mode, std::vector<Math::Vector2> points);
-			virtual void Tranzwarp();
+		    virtual void Tranzwarp();
+			virtual void rotate(float num);
 		protected:
-			Engine::Math::Vector2 m_position;
-			float m_angle;
+			
+			Engine::Math::Vector2 m_ShipPosition;
+			float m_angle = 0.0f;
+			float m_angleInRads = 0.0f;
+			float m_PlayerSpeed = 5.0f;
 		};
 	}
 }

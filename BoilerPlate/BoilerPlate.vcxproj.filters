@@ -24,6 +24,9 @@
     <ClCompile Include="Drawable2D.cpp">
       <Filter>Engine\Source files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Constants.cpp">
+      <Filter>Engine\Source files\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -48,6 +51,9 @@
       <Filter>Engine\Header files\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Constants.h">
+      <Filter>Engine\Header files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="EPhysics.h">
       <Filter>Engine\Header files\Math</Filter>
     </ClInclude>
   </ItemGroup>

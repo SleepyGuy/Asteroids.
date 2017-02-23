@@ -7,6 +7,7 @@ namespace Engine
 	namespace Math
 	{
 		const float PI = 3.141592653f;
+		
 	}
 }
 #endif // !_CONSTANTS_H

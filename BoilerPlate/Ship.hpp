@@ -8,6 +8,7 @@
 //
 #include "Vector2.hpp"
 #include "Entity.hpp"
+#include "EPhysics.h"
 
 
 namespace Asteroids
@@ -26,12 +27,14 @@ namespace Asteroids
 			 * FUNCTIONS
 			 */
 			void MoveUp();
-			void MoveDown();
 			void MoveLeft();
 			void MoveRight();
 			void Draw();
+			void update(float deltaTime);
 		private:
 			std::vector<Engine::Math::Vector2> m_points;
+			float m_mass;
+			Engine::Math::Vector2 m_velocity;
 			
 		};
 	}
