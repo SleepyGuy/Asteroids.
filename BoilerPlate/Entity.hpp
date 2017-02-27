@@ -11,7 +11,10 @@ namespace Asteroids
 	namespace Entities
 	{
 		class Entity : public Engine::Graphics::Drawable2D
-		{};
+		{
+		   protected:
+			   float m_angleinRads;
+		};
 	}
 }
 

@@ -14,10 +14,12 @@
 //
 #include "Configuration.hpp"
 #include "Entity.hpp"
+#include "Asteroids.h"
 
 
 namespace Engine
 {
+	std::vector<Asteroids::Entities::Asteroid*> m_asteroid;
 	const float DESIRED_FRAME_RATE = 120.0f;
 	const float DESIRED_FRAME_TIME = 1.0f / DESIRED_FRAME_RATE;
 	bool stop = true;
@@ -100,6 +102,7 @@ namespace Engine
 		//
 		Asteroids::Utilities::Configuration config;
 		m_entities = config.LoadModels();
+		m_asteroid = config.CreateAsteroid();
 
 		return true;
 	}
@@ -205,6 +208,8 @@ namespace Engine
 
 		//
 		m_entities[m_currentIndex]->Draw();
+		m_asteroid[0]->Draw();
+		
 
 		SDL_GL_SwapWindow(m_mainWindow);
 	}

@@ -174,6 +174,7 @@ XCOPY "$(SolutionDir)\BoilerPlate\models" "$(TargetDir)\models" /i /s /Y</Comman
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="Asteroids.cpp" />
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="Constants.cpp" />
     <ClCompile Include="Drawable2D.cpp" />
@@ -188,6 +189,7 @@ XCOPY "$(SolutionDir)\BoilerPlate\models" "$(TargetDir)\models" /i /s /Y</Comman
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
+    <ClInclude Include="Asteroids.h" />
     <ClInclude Include="Configuration.hpp" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Drawable2D.hpp" />

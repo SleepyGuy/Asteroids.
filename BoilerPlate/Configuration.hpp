@@ -7,6 +7,7 @@
 
 //
 #include "Ship.hpp"
+#include "Asteroids.h"
 
 namespace Asteroids
 {
@@ -16,6 +17,9 @@ namespace Asteroids
 		{
 		public:
 			std::vector<Entities::Ship*> LoadModels();
+			std::vector<Entities::Asteroid*> CreateAsteroid();
+		protected:
+			int m_sizeFactor = 1;
 		};
 	}
 }

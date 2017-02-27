@@ -27,6 +27,9 @@
     <ClCompile Include="Constants.cpp">
       <Filter>Engine\Source files\Math</Filter>
     </ClCompile>
+    <ClCompile Include="Asteroids.cpp">
+      <Filter>Game\Source files\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -55,6 +58,9 @@
     </ClInclude>
     <ClInclude Include="EPhysics.h">
       <Filter>Engine\Header files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Asteroids.h">
+      <Filter>Game\Header files\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

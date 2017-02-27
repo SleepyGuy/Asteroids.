@@ -1,5 +1,5 @@
 #include "Ship.hpp"
-#include "SDL2\SDL_opengl.h"66
+#include "SDL2\SDL_opengl.h"
 #include "Entity.hpp"
 #include "Constants.h"
 #include "EPhysics.h"
@@ -8,6 +8,7 @@ namespace Asteroids
 	namespace Entities
 	{
 		const float ANGLE_OFFSET = 90.0f;
+
 		Ship::Ship(const std::vector<Engine::Math::Vector2> points)
 			: m_points(points)
 		{
