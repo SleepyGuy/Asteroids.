@@ -10,40 +10,34 @@ namespace Engine
 		class Vector2
 		{
 		public:
-			/*
-			 * CONST
-			 */
 			Vector2( );
-			Vector2( float x, float y );
+			Vector2(float x, float y);
+			Vector2(float uniform);
 
-			/*
-			 * PUBLIC FUNCTIONS
-			 */
+			//Public Functions
 			float Length();
 			float SquaredLength();
 			const float GetX();
 			const float GetY();
-			const float getLength();
-			
+			void setX(float x);
+			void setY(float y);
 
-			/*
-			 * OPERATORS
-			 */
-			Vector2& operator=( const Vector2& rhs );
-			Vector2& operator+=( const Vector2& rhs );
-			Vector2& operator-=( const Vector2& rhs );
-			Vector2& operator*=( const Vector2& rhs );
-			Vector2& operator/=( const Vector2& rhs );
-			Vector2 operator+( const Vector2& rhs );
-			Vector2 operator-( const Vector2& rhs );
-			Vector2 operator-( );
-			Vector2 operator*( const Vector2& rhs );
-			Vector2 operator/( const Vector2& rhs );
+			//Operators
+			Vector2& operator=(const Vector2& rhs);
+			Vector2& operator+=(const Vector2& rhs);
+			Vector2& operator-=(const Vector2& rhs);
+			Vector2& operator*=(const Vector2& rhs);
+			Vector2& operator/=(const Vector2& rhs);
+			Vector2 operator+(const Vector2& rhs);
+			Vector2 operator-(const Vector2& rhs);
+			Vector2 operator-();
+			Vector2 operator*(const Vector2& rhs);
+			Vector2 operator/(const Vector2& rhs);
 			bool operator==(const Vector2& rhs);
 			bool operator!=(const Vector2& rhs);
 			friend Vector2 operator*(float scaleUnit, const Vector2& rhs);
-			friend Vector2 operator*(const Vector2& lhs, float scaleUnit);
-
+			friend Vector2 operator*(const Vector2& rhs, float scaleUnit);
+		
 		private:
 			float m_x;
 			float m_y;
@@ -51,5 +45,4 @@ namespace Engine
 		};
 	}
 }
-
-#endif // !_VECTOR2_H_
+#endif

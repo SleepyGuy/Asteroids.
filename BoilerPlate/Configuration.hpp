@@ -1,13 +1,10 @@
 #pragma once
 #ifndef _CONFIGURATION_H_
 #define _CONFIGURATION_H_
-
-//
 #include <vector>
 
-//
 #include "Ship.hpp"
-#include "Asteroids.h"
+#include "Asteroid.h"
 
 namespace Asteroids
 {
@@ -17,11 +14,13 @@ namespace Asteroids
 		{
 		public:
 			std::vector<Entities::Ship*> LoadModels();
-			std::vector<Entities::Asteroid*> CreateAsteroid();
+			
+			std::vector<Entities::Asteroid*> CreateAsteroid(int totalasteroid);
+
 		protected:
+		
 			int m_sizeFactor = 1;
 		};
 	}
 }
-
 #endif // !_CONFIGURATION_H_

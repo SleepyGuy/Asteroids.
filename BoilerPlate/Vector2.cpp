@@ -6,18 +6,25 @@ namespace Engine
 	namespace Math
 	{
 		Vector2::Vector2()
-			: m_x( 0.0f )
-			, m_y( 0.0f )
-			, m_length( 0.0f )
+			: m_x(0.0f)
+			, m_y(0.0f)
+			, m_length(0.0f)
 		{}
 
 		Vector2::Vector2(float x, float y)
-			: m_x( x )
-			, m_y( y )
-			, m_length( 0 )
+			: m_x(x)
+			, m_y(y)
+			, m_length(0)
 		{
-			// Calculate length for the given point
-			//
+			
+			Length();
+		}
+
+		Vector2::Vector2(float uniform)
+			: m_x(uniform)
+			, m_y(uniform)
+			, m_length(0)
+		{
 			Length();
 		}
 
@@ -30,18 +37,20 @@ namespace Engine
 		{
 			return m_y;
 		}
-		const float Vector2::getLength()
-			 {
-			     return m_length;
-			}
 
 		float Vector2::Length()
 		{
-			float squareDistance = std::sqrt(m_x * m_x + m_y * m_y);
-			m_length = squareDistance;
 			return std::sqrt(m_x * m_x + m_y * m_y);
 		}
+		void Vector2::setX(float x)
+		{
+			m_x = x;
+		};
 
+		void Vector2::setY(float y)
+		{
+			m_y = y;
+		};
 
 		float Vector2::SquaredLength()
 		{
@@ -49,11 +58,9 @@ namespace Engine
 		}
 
 		// operators
-		//
 		Vector2& Vector2::operator=(const Vector2& rhs)
 		{
-			// Prevent self assignment. Two objects
-			// are equal if their memory address are equal.
+			
 			if (this == &rhs)
 			{
 				return *this;

@@ -1,71 +1,59 @@
-#include "Drawable2D.hpp"
-// OPENGL
+#include "Drawable2D.hpp"	
 #include <SDL2\SDL_opengl.h>
+
 #include <iostream>
-#include "Ship.hpp"
-#include "SDL2\SDL_opengl.h"66
-#include "Entity.hpp"
-#include "EPhysics.h"
-#include  "Constants.h"
+
 namespace Engine
 {
 	namespace Graphics
 	{
 		void Drawable2D::Translate(Math::Vector2 position)
 		{
-			m_ShipPosition = position;
-			
+			m_position = position;
 		}
 
-		void Drawable2D::Draw(unsigned int drawing_mode, std::vector<Engine::Math::Vector2> model)
+		void Drawable2D::Draw(unsigned int mode, std::vector<Math::Vector2> points)
 		{
-			
-
+			// Reset transformation matrix to identity
 			glLoadIdentity();
-		
-			Tranzwarp();
-			glTranslatef(m_ShipPosition.GetX(), m_ShipPosition.GetY(), 0.0f);
+
+			glTranslatef(m_position.GetX(), m_position.GetY(), 0.0f);
 
 			glRotatef(m_angle, 0.0f, 0.0f, 1.0f);
+			//std::cout << m_angle << std::endl;
 
-			glBegin(drawing_mode);
-				for(auto point : model)
-				{
-					glVertex2f(point.GetX(), point.GetY());
-				}				
-			glEnd();
-			return;
-		}
-		void Drawable2D::rotate(float num)
-		{
-						
-				m_angle += num;
-			    m_angleInRads = (m_angle + Engine::Graphics::ANGLE_OFFSET) * (Engine::Math::PI / 180);
-		}
-		void Drawable2D::Tranzwarp()
-			 {
-			if (m_ShipPosition.GetX() > 650)
-				{
-				   Engine::Math::Vector2 invertedPos(m_ShipPosition.GetX() * -1, m_ShipPosition.GetY() * -1);
-				   Translate(invertedPos);
-				}
-			else if (m_ShipPosition.GetX() < -650)
-				 {
-				    Engine::Math::Vector2 invertedPos(m_ShipPosition.GetX() * -1, m_ShipPosition.GetY() * -1);
-					Translate(invertedPos);
-				}
-			
-				if (m_ShipPosition.GetY() > 400)
-				{
-					Engine::Math::Vector2 invertedPos(m_ShipPosition.GetX() * -1, m_ShipPosition.GetY() * -1);
-					Translate(invertedPos);
-				}
-			else if (m_ShipPosition.GetY() < -400)
-			    {
-				Engine::Math::Vector2 invertedPos(m_ShipPosition.GetX() * -1, m_ShipPosition.GetY() * -1);
-				Translate(invertedPos);
-			    }
+			glBegin(mode);
+			for (auto point : points)
+			{
+				glVertex2f(point.GetX(), point.GetY());
 			}
-	
+			glEnd();
+		}
+
+		void Drawable2D::Tranzwarp()
+		{
+			if (m_position.GetX() > 650)
+			{
+				m_position.setX(m_position.GetX() * -1);
+				m_position.setY(m_position.GetY() * -1);
+			}
+			else if (m_position.GetX() < -650)
+			{
+				m_position.setX(m_position.GetX() * -1);
+				m_position.setY(m_position.GetY() * -1);
+			}
+
+			if (m_position.GetY() > 400)
+			{
+				m_position.setX(m_position.GetX() * -1);
+				m_position.setY(m_position.GetY() * -1);
+			}
+			else if (m_position.GetY() < -400)
+			{
+				m_position.setX(m_position.GetX() * -1);
+				m_position.setY(m_position.GetY() * -1);
+			}
+		
+		}
 	}
 }

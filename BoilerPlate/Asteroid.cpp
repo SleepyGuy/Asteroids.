@@ -1,10 +1,11 @@
-#include "Asteroids.h"
+#include "Asteroid.h"
 
 #include <SDL2/SDL_opengl.h>
 
-#include "Constants.h"
-#include "MathUtilities.h"
+#include "Constants.hpp"
+#include "MathUtilities.hpp"
 #include <iostream>
+
 namespace Asteroids
 {
 	namespace Entities
@@ -17,8 +18,7 @@ namespace Asteroids
 		const float AST_THRUST = 5.0f;
 		const float MAX_SPEED = 100.0f;
 		const float m_mass = 2.0f;
-		//Teleport Declaration
-		//
+		
 		inline float teleport(float axis, float min, float max)
 		{
 			if (axis < min)
@@ -43,12 +43,13 @@ namespace Asteroids
 		{
 			Entity::Draw(GL_LINE_LOOP, m_points);
 		}
+
 		void Asteroid::Update(float omegaTime)
 		{
 			float speed = std::fabs(m_velocity.Length());
 			if (speed > MAX_SPEED)
 			{
-				m_velocity = Engine::Math::Vector2(
+					m_velocity = Engine::Math::Vector2(
 					(m_velocity.GetX() / speed) * MAX_SPEED,
 					(m_velocity.GetY() / speed) * MAX_SPEED
 				);
@@ -81,7 +82,5 @@ namespace Asteroids
 
 			Entity::Translate(newPos);
 		}
-	
-		
 	}
 }

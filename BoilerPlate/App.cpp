@@ -11,18 +11,12 @@
 #include <sstream>
 #include <string>
 
-//
 #include "Configuration.hpp"
-#include "Entity.hpp"
-#include "Asteroids.h"
-
 
 namespace Engine
 {
-	std::vector<Asteroids::Entities::Asteroid*> m_asteroid;
 	const float DESIRED_FRAME_RATE = 120.0f;
-	const float DESIRED_FRAME_TIME = 1.0f / DESIRED_FRAME_RATE;
-	bool stop = true;
+	const float DESIRED_FRAME_TIME = 0.1f / DESIRED_FRAME_RATE;
 
 	App::App(const std::string& title, const int width, const int height)
 		: m_title(title)
@@ -31,7 +25,9 @@ namespace Engine
 		, m_nUpdates(0)
 		, m_timer(new TimeManager)
 		, m_mainWindow(nullptr)
+		, m_context(nullptr)
 		, m_currentIndex(0)
+		
 	{
 		m_state = GameState::UNINITIALIZED;
 		m_lastFrameTime = m_timer->GetElapsedTimeInSeconds();
@@ -39,17 +35,6 @@ namespace Engine
 
 	App::~App()
 	{
-		// Delete entities
-		//
-		for (auto entity : m_entities)
-		{
-			delete entity;
-		}
-
-		// Clear list
-		//
-		m_entities.clear();
-
 		CleanupSDL();
 	}
 
@@ -98,45 +83,39 @@ namespace Engine
 		//
 		m_state = GameState::INIT_SUCCESSFUL;
 
-		// Loading models
-		//
-		Asteroids::Utilities::Configuration config;
-		m_entities = config.LoadModels();
-		m_asteroid = config.CreateAsteroid();
+		//Load models
+		Asteroids::Utilities::Configuration configure;
+
+		m_entities = configure.LoadModels();
+
+		m_asteroid = configure.CreateAsteroid(10);
 
 		return true;
 	}
 
 	void App::OnKeyDown(SDL_KeyboardEvent keyBoardEvent)
 	{		
-
-		/* 
-		 * W (UP)
-		 * A (LEFT)
-		 * S (DOWN)
-		 * D (RIGHT)
-		 */
-
 		switch (keyBoardEvent.keysym.scancode)
 		{
 		case SDL_SCANCODE_W:
-			std::cout << "Moving up W\n";
+			std::cout << "Moving up" << std::endl;
 			m_entities[m_currentIndex]->MoveUp();
 			break;
 		case SDL_SCANCODE_A:
-			std::cout << "Moving Left A\n";
+			std::cout << "Moving left" << std::endl;
 			m_entities[m_currentIndex]->MoveLeft();
 			break;
 		case SDL_SCANCODE_S:
-			
+			std::cout << "Moving Down" << std::endl;
+			m_entities[m_currentIndex]->MoveDown();
 			break;
 		case SDL_SCANCODE_D:
-			std::cout << "Moving Right D\n";
+			std::cout << "Moving Right" << std::endl;
 			m_entities[m_currentIndex]->MoveRight();
 			break;
-		default:			
+		default:
 			//SDL_Log("%S was pressed.", keyBoardEvent.keysym.scancode);
-			SDL_Log("Physical %s key acting as %s key",
+			SDL_Log("Physical %s key is being pressed",
 				SDL_GetScancodeName(keyBoardEvent.keysym.scancode),
 				SDL_GetKeyName(keyBoardEvent.keysym.sym));
 			break;
@@ -147,26 +126,13 @@ namespace Engine
 	{
 		switch (keyBoardEvent.keysym.scancode)
 		{
-		case SDL_SCANCODE_W:
-			std::cout << "You are releasing W\n";
-			break;
-		case SDL_SCANCODE_A:
-			std::cout << "You are releasing A\n";
-			break;
-		case SDL_SCANCODE_S:
-			std::cout << "You are releasing S\n";
-			break;
-		case SDL_SCANCODE_D:
-			std::cout << "You are releasing D\n";
-			break;
 		case SDL_SCANCODE_P:
 			m_currentIndex++;
 			if (m_currentIndex > (m_entities.size() - 1))
 			{
 				m_currentIndex = 0;
 			}
-
-			std::cout << m_currentIndex << std::endl;
+			std::cout << "Changed ship model" << std::endl;
 			break;
 		case SDL_SCANCODE_ESCAPE:
 			OnExit();
@@ -181,20 +147,22 @@ namespace Engine
 	{
 		double startTime = m_timer->GetElapsedTimeInSeconds();
 
-		// Update code goes here
-		//
-		m_entities[m_currentIndex]->update(DESIRED_FRAME_RATE);
+		
+		m_entities[m_currentIndex]->Update(DESIRED_FRAME_TIME);
+		m_asteroid[0]->Update(DESIRED_FRAME_TIME);
+		
+
 
 		double endTime = m_timer->GetElapsedTimeInSeconds();
 		double nextTimeFrame = startTime + DESIRED_FRAME_TIME;
 
 		while (endTime < nextTimeFrame)
 		{
-			// Spin lock
+		
 			endTime = m_timer->GetElapsedTimeInSeconds();
 		}
 
-		//double elapsedTime = endTime - startTime;        
+		   
 
 		m_lastFrameTime = m_timer->GetElapsedTimeInSeconds();
 
@@ -203,21 +171,16 @@ namespace Engine
 
 	void App::Render()
 	{
-		glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		//
 		m_entities[m_currentIndex]->Draw();
 		m_asteroid[0]->Draw();
-		
-
 		SDL_GL_SwapWindow(m_mainWindow);
 	}
 
 	bool App::SDLInit()
 	{
-		// Initialize SDL's Video subsystem
-		//
 		if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 		{
 			std::cerr << "Failed to init SDL" << std::endl;
@@ -250,7 +213,6 @@ namespace Engine
 		m_context = SDL_GL_CreateContext(m_mainWindow);
 		SDL_GL_MakeCurrent(m_mainWindow, m_context);
 
-		// Make double buffer interval synced with vertical scanline refresh
 		SDL_GL_SetSwapInterval(0);
 
 		return true;
@@ -258,27 +220,18 @@ namespace Engine
 
 	void App::SetupViewport()
 	{
-		// Defining ortho values
-		//
 		float halfWidth = m_width * 0.5f;
 		float halfHeight = m_height * 0.5f;
 
-		// Set viewport to match window
-		//
 		glViewport(0, 0, m_width, m_height);
-
-		// Set Mode to GL_PROJECTION
-		//
+		
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-
-		// Set projection MATRIX to ORTHO
-		//
+		
 		glOrtho(-halfWidth, halfWidth, -halfHeight, halfHeight, -1, 1);
 
-		// Setting Mode to GL_MODELVIEW
-		//
 		glMatrixMode(GL_MODELVIEW);
+
 	}
 
 	bool App::GlewInit()
@@ -295,8 +248,6 @@ namespace Engine
 
 	void App::CleanupSDL()
 	{
-		// Cleanup
-		//
 		SDL_GL_DeleteContext(m_context);
 		SDL_DestroyWindow(m_mainWindow);
 
@@ -305,8 +256,6 @@ namespace Engine
 
 	void App::OnResize(int width, int height)
 	{
-		// TODO: Add resize functionality
-		//
 		m_width = width;
 		m_height = height;
 
@@ -315,12 +264,11 @@ namespace Engine
 
 	void App::OnExit()
 	{
-		// Exit main for loop
-		//
+		
 		m_state = GameState::QUIT;
 
-		// Stop the timer
-		//
-		m_timer->Stop();
+		
+		CleanupSDL();
+		
 	}
 }

@@ -14,7 +14,7 @@ namespace Asteroids
 		class Asteroid : public Entity
 		{
 		public:
-
+			
 			Asteroid(const std::vector<Engine::Math::Vector2> points);
 
 			struct AsteroidSize
@@ -27,22 +27,21 @@ namespace Asteroids
 
 				};
 			};
-			//PUBLIC
-			//
+			
 			explicit Asteroid(AsteroidSize::Size size);
 			void Update(float omegaTime);
 			void Draw();
 			void ApplyRandomTranslation() const;
 
-			//Getter
+			
 			AsteroidSize::Size GetSize() const { return m_size; };
 		private:
 			void Generate();
 			void ApplyRandomImpulse() const;
 			std::vector<Engine::Math::Vector2> m_points;
-			AsteroidSize::Size m_size;
-			int m_sizeFactor = 1;
 			Engine::Math::Vector2 m_velocity;
+			AsteroidSize::Size m_size;
+			int m_sizeFactor;
 		};
 	}
 }

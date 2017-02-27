@@ -7,10 +7,11 @@
 #include <list>
 #include <vector>
 
-
+// Asteroids
 #include "SDLEvent.hpp"
 #include "TimeManager.hpp"
 #include "Ship.hpp"
+#include "Asteroid.h"
 
 namespace Engine
 {
@@ -69,10 +70,9 @@ namespace Engine
 		GameState::State					m_state;
 		Engine::TimeManager*				m_timer;
 
-
-		//
 		int									m_currentIndex;
 		std::vector<Asteroids::Entities::Ship*> m_entities;
+		std::vector<Asteroids::Entities::Asteroid*> m_asteroid;
 
 	};
 }
