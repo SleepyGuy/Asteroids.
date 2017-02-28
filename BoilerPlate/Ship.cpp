@@ -1,130 +1,221 @@
-#include "Ship.hpp"
-#include <SDL2\SDL_opengl.h>
+#include "Ship.h"
+
+//OpenGL includes
+#include "SDL2\SDL_opengl.h"
+
+//STD
 #include <cmath>
-#include "Constants.hpp"
-#include <iostream>
+
+//
+#include <algorithm>
+
+//
+#include "EPhysics.h"
+
 
 namespace Asteroids
 {
-	namespace Entities
+	namespace Entity
 	{
-		//Constants
-		const int WIDTH = 1280;
-		const int HEIGHT = 720;
-		const float ANGLE_OFFSET = 90.0f;
-		const float DRAG = 1.0f;
-		const float THRUST = 25.5f;
-		const float MAX_SPEED = 1000.0f;
-
-		inline float teleport(float axis, float min, float max)
+		Ship::Ship(std::vector<Engine::Math::Vector2D> model_points)
+			: m_velocity()
+			, m_usedBullets(0)
 		{
-			if (axis < min)
+			m_points = model_points;
+			m_radius = 40.f;
+			m_angle = 0.f;
+			m_angleInRads = 0.f;
+			Mass();
+			m_respawnTime = 0;
+			m_currentSpeed = 0.f;
+		};
+
+		void Ship::Render()
+		{
+			// Respawn delay
+			if (!m_inmune) 
 			{
-				return max - (min - axis);
+				if (m_respawnTime >= 120)
+				{
+					setCollision(true);
+					m_respawnTime = 0;
+					m_currentColor = Engine::Math::Vector3D(1.f);
+				}
+				m_respawnTime++;
 			}
 
-			if (axis > max)
+			
+			glLoadIdentity();
+
+			wrapAround();
+
+			
+			glTranslatef(m_position.m_x, m_position.m_y, 0.0f);
+
+			glRotatef(m_angle, 0.0f, 0.0f, 1.0f);
+
+			glColor3f(1, 1, 1);
+
+			glBegin(GL_LINE_LOOP);
+			for (auto temp : m_points)
 			{
-				return min + (axis - max);
+				glVertex2f(temp.m_x, temp.m_y);
 			}
+			glEnd();
 
-			return axis;
+			m_angleInRads = (m_angle + Asteroids::angle_offset) * (Engine::Math::PI / 180);
+
+			for (int i = 0; i < m_magazine.size(); i++)
+				m_magazine[i]->Render();
+
+
+			return;
 		}
 
-		Ship::Ship(const std::vector<Engine::Math::Vector2> points)
-			: m_points(points), m_mass(0.5f)
+		void Ship::MoveForward()
 		{
-			m_angle = 0.0f;
-			m_angleinRads = ANGLE_OFFSET * (Engine::Math::PI / 180);
-		}
-
-		void Ship::MoveUp()
-		{
-			//Impulse
+			
 			if (m_mass > 0)
 			{
-				float x = (THRUST / m_mass) * std::cosf(m_angleinRads);
-				float y = (THRUST / m_mass) * std::sinf(m_angleinRads);
-				m_velocity += Engine::Math::Vector2(x, y);
+				float impulse = (Physics::THRUST / m_mass);
+				float x = impulse * std::cosf(m_angleInRads);
+				float y = impulse * std::sinf(m_angleInRads);
+
+				m_velocity += Engine::Math::Vector2D(x, y);
 			}
-		}
-
-		void Ship::MoveDown()
-		{
-			float x = (THRUST / m_mass) * std::cosf(m_angleinRads);
-			float y = (THRUST / m_mass) * std::sinf(m_angleinRads);
-			m_velocity -= Engine::Math::Vector2(x, y);
-		}
-
-		void Ship::MoveLeft()
-		{
-			m_angle += 9.5f;
-			m_angleinRads = (m_angle + ANGLE_OFFSET) * (Engine::Math::PI / 180);
-			
 		}
 
 		void Ship::MoveRight()
 		{
-			m_angle -= 9.5f;
-			m_angleinRads = (m_angle + ANGLE_OFFSET) * (Engine::Math::PI / 180);
-			
+			rotate(-5.0f);
 		}
 
-
-		void Ship::Draw()
+		void Ship::MoveLeft()
 		{
-			Entity::Draw(GL_LINE_LOOP, m_points);
+			rotate(5.0f);
 		}
-		
-		
 
-		void Ship::Update(float omega)
+		void Ship::Shoot()
 		{
-			//SPEED LIMIT
-			float speed = std::fabs(m_velocity.Length());
-
-			if (speed > MAX_SPEED)
+			if (m_usedBullets == 5) return;
+			else if (m_usedBullets < 5)
 			{
-				
-				m_velocity = Engine::Math::Vector2(
-					(m_velocity.GetX() / speed) * MAX_SPEED ,
-					(m_velocity.GetY() / speed) * MAX_SPEED 
-					);
+				Bullet* nBullet = new Bullet(m_position, m_velocity, m_angle);
+				m_magazine.push_back(nBullet);
+				m_usedBullets++;
+			}
+		}
 
-				speed = std::fabs(m_velocity.Length());
-				
+		void Ship::translate(Engine::Math::Vector2D pos) 
+		{
+			
+			m_position = pos;
+		};
+
+		void Ship::rotate(float num) 
+		{
+			
+			m_angle += num;
+			m_angleInRads = (m_angle + Asteroids::angle_offset) * (Engine::Math::PI / 180);
+		};
+
+		void Ship::Update(float deltaTime) 
+		{
+			
+			float speed = std::fabs(m_velocity.Length());
+			if (speed > Physics::MAX_PLAYER_SPEED)
+			{
+				m_velocity = Engine::Math::Vector2D(
+				(m_velocity.m_x / speed) * Physics::MAX_PLAYER_SPEED,
+				(m_velocity.m_y / speed) * Physics::MAX_PLAYER_SPEED
+				 );
+
+				m_currentSpeed = std::fabs(m_velocity.m_length);
 			}
 			
-
-			//Drag Effect 
-			m_velocity = Engine::Math::Vector2(
-				m_velocity.GetX() * DRAG,
-				m_velocity.GetY() * DRAG 
-				);
-				
-			//X,Y Position 
-			Engine::Math::Vector2 newPos(
-				m_position.GetX() + (m_velocity.GetX() * omega),
-				m_position.GetY() + (m_velocity.GetY() * omega)
-				);
-
-			// Tranzwarp
-			float HalfWidth = (WIDTH / 2);
-			float HalfHeight = (HEIGHT / 2);
-			float MinX = -HalfWidth;
-			float MaxX = HalfWidth;
-			float MinY = -HalfHeight;
-			float MaxY = HalfHeight;
-
-			float x = teleport(newPos.GetX(), MinX, MaxX);
-			float y = teleport(newPos.GetY(), MinY, MaxY);
+			
+			m_velocity = Engine::Math::Vector2D(
+				m_velocity.m_x * Physics::DRAG, 
+				m_velocity.m_y * Physics::DRAG);
 
 			
-			newPos = Engine::Math::Vector2(x, y);
+			Engine::Math::Vector2D pos = m_position + m_velocity;
 
-			Entity::Translate(newPos);
+			
+			translate(pos);
 
+			for (int i = 0; i < m_magazine.size(); i++)
+			{
+				m_magazine[i]->Update(deltaTime);
+				if (m_magazine[i]->m_lifeTime >= 240)
+				{
+					deleteBullet(m_magazine[i]);
+					break;
+				}
+			}
+			return;
 		}
 
+		void Ship::Respawn() 
+		{
+			setCollision(false);
+			m_position = Engine::Math::Vector2D(0.f);
+			ResetOrientation();
+			m_currentColor = Engine::Math::Vector3D(1.f, 0.f, 0.f);
+			setVelocity(Engine::Math::Vector2D(0.f, 0.f));
+		};
+
+		void Ship::wrapAround() 
+		{
+			if (m_position.m_x > 650)
+			{
+				Engine::Math::Vector2D invertedPos(m_position.m_x * -1, m_position.m_y * -1);
+				translate(invertedPos);
+			}
+			else if (m_position.m_x < -650)
+			{
+				Engine::Math::Vector2D invertedPos(m_position.m_x * -1, m_position.m_y * -1);
+				translate(invertedPos);
+			}
+
+			if (m_position.m_y > 400)
+			{
+				Engine::Math::Vector2D invertedPos(m_position.m_x * -1, m_position.m_y * -1);
+				translate(invertedPos);
+			}
+			else if (m_position.m_y < -400)
+			{
+				Engine::Math::Vector2D invertedPos(m_position.m_x * -1, m_position.m_y * -1);
+				translate(invertedPos);
+			}
+		};
+
+		void Ship::deleteBullet(Bullet* dBullet) 
+		{
+			m_magazine.erase(
+				remove(m_magazine.begin(), m_magazine.end(), dBullet), m_magazine.end()
+			);
+			delete dBullet;
+			m_usedBullets--;
+		}
+
+		void Ship::Mass() 
+		{
+			for(auto count : m_points) 
+			{
+				m_mass += 0.2f;
+			}
+
+			if (m_mass < 1.0f)
+				m_mass = 1.5f;
+
+			return;
+		};
+
+		void Ship::ResetOrientation() 
+		{
+			m_angle = 0.f;
+			m_angleInRads = 0.f;
+		};
 	}
 }

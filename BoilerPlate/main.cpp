@@ -6,13 +6,14 @@
 // C++ STL
 #include <cassert>
 #include <iostream>
+
+// Using
 #include "App.hpp"
-#include "Utilities.hpp"
+#include "Utilities.h"
 
-const int WIDTH = 1366;
-const int HEIGHT = 768;
+const int WIDTH = 1270;
+const int HEIGHT = 720;
 
-Engine::FileSystem::Utilities utils;
 int main(int argc, char* argv[])
 {
 #if _MSC_VER && _DEBUG
@@ -22,20 +23,10 @@ int main(int argc, char* argv[])
 	assert(_CrtCheckMemory());
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
+	
 	// Create Game Object
-
-
-
-	/*	
-		CREATE AN ASTEROID <-- DONE
-		MAKE IT MOVE WITH PHYSICS
-		HAVE MORE ASTEROIDS ON SCREEN
-		COLLISION BETWEEN PLAYER AND ASTEROID
-		BULLET TIME
-	*/ 
-
-
-	Engine::App* app = new Engine::App("Asteroids!", WIDTH, HEIGHT);
+	//
+	Engine::App* app = new Engine::App("Asteroids", WIDTH, HEIGHT);
 
 	// Initialize game
 	//
@@ -52,5 +43,6 @@ int main(int argc, char* argv[])
 	// Delete game object
 	//
 	delete app;
+
 	return 0;
 }

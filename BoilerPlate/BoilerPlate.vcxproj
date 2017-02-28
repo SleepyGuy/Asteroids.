@@ -119,8 +119,12 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x86\SDL2.dll" "$(TargetDir)SDL2
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(SolutionDir)\Externals\glew-1.13.0\bin\Release\x64\glew32.dll" "$(TargetDir)glew32.dll"
-copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2.dll"</Command>
+copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2.dll"
+copy "$(SolutionDir)\BoilerPlate\models\" "$(TargetDir)\models"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>if not exist "$(TargetDir)\models" mkdir "$(TargetDir)\models"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -173,30 +177,37 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Asteroid.cpp" />
-    <ClCompile Include="Configuration.cpp" />
-    <ClCompile Include="Drawable2D.cpp" />
-    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Asteroids.cpp" />
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Entities.cpp" />
+    <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="Utilities.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SDLEvent.cpp" />
-    <ClCompile Include="Ship.cpp" />
-    <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="TimeManager.cpp" />
-    <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="Vector2.cpp" />
+    <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
     <ClInclude Include="Asteroid.h" />
-    <ClInclude Include="Configuration.hpp" />
-    <ClInclude Include="Constants.hpp" />
-    <ClInclude Include="Drawable2D.hpp" />
-    <ClInclude Include="Entity.hpp" />
-    <ClInclude Include="MathUtilities.hpp" />
+    <ClInclude Include="Asteroids.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Entities.h" />
+    <ClInclude Include="EPhysics.h" />
+    <ClInclude Include="MathUtilities.h" />
+    <ClInclude Include="Ship.h" />
+    <ClInclude Include="Utilities.h" />
     <ClInclude Include="SDLEvent.hpp" />
-    <ClInclude Include="Ship.hpp" />
     <ClInclude Include="TimeManager.hpp" />
-    <ClInclude Include="Utilities.hpp" />
-    <ClInclude Include="Vector2.hpp" />
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="Vector2.h" />
+    <ClInclude Include="Vector3.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ToDo.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -10,17 +10,15 @@
 // Asteroids
 #include "SDLEvent.hpp"
 #include "TimeManager.hpp"
-#include "Ship.hpp"
-#include "Asteroid.h"
+
+//
+#include "Asteroids.h"
 
 namespace Engine
 {
 	class App : public SDLEvent
 	{
 	public:
-		/* =============================================================
-		* ENUMERATORS
-		* ============================================================= */
 		struct GameState
 		{
 			enum State
@@ -34,9 +32,7 @@ namespace Engine
 			};
 		};
 
-		/* =============================================================
-		 * PUBLIC FUNCTIONS
-		 * ============================================================= */
+		
 		App( const std::string& title, const int width, const int height );
 		~App( );
 		void Execute						( );
@@ -44,9 +40,6 @@ namespace Engine
 		void Update							( );
 		void Render							( );
 	private:
-		/* =============================================================
-		 * PRIVATE FUNCTIONS
-		 * ============================================================= */
 		bool SDLInit						( );
 		bool GlewInit						( );
 		void SetupViewport					( );
@@ -56,24 +49,16 @@ namespace Engine
 		void OnKeyDown						( SDL_KeyboardEvent keyBoardEvent ) override;
 		void OnKeyUp						( SDL_KeyboardEvent keyBoardEvent ) override;
 
-
-		/* =============================================================
-		 * MEMBERS
-		 * ============================================================= */
-		int									m_width;
-		int									m_height;
-		int									m_nUpdates;
-		double								m_lastFrameTime;
-		std::string							m_title;
-		SDL_Window*							m_mainWindow;
-		SDL_GLContext						m_context;
-		GameState::State					m_state;
-		Engine::TimeManager*				m_timer;
-
-		int									m_currentIndex;
-		std::vector<Asteroids::Entities::Ship*> m_entities;
-		std::vector<Asteroids::Entities::Asteroid*> m_asteroid;
-
+		int															m_width;
+		int															m_height;
+		int															m_nUpdates;
+		double														m_lastFrameTime;
+		std::string													m_title;
+		SDL_Window*													m_mainWindow;
+		SDL_GLContext												m_context;
+		GameState::State											m_state;
+		Engine::TimeManager*										m_timer;
+		Game::AsteroidsGame*										m_game;
 	};
 }
 #endif /* GAME_HPP */

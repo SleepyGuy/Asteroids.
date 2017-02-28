@@ -1,49 +1,47 @@
 #pragma once
-#ifndef _ASTEROID_H_
-#define _ASTEROID_H_
+#ifndef _H_Asteroid_
+#define	_H_Asteroid_
 
-#include <vector>
-
-#include "Vector2.hpp"
-#include "Entity.hpp"
+#include "Entities.h"
 
 namespace Asteroids
 {
-	namespace Entities
+	namespace Entity
 	{
-		class Asteroid : public Entity
+		const int MAX_POINTS = 12;
+		const float MIN_SIZE = 25.f;
+		const float MAX_SIZE = 45.f;
+
+		class Asteroid : public Entities
 		{
 		public:
-			
-			Asteroid(const std::vector<Engine::Math::Vector2> points);
-
-			struct AsteroidSize
+			enum AsteroidSize
 			{
-				enum Size
-				{
-					BIG = 0,
-					MEDIUM = 1,
-					SMALL = 2,
-
-				};
+				BIG = 0,
+				MEDIUM = 1,
+				SMALL = 2
 			};
-			
-			explicit Asteroid(AsteroidSize::Size size);
-			void Update(float omegaTime);
-			void Draw();
-			void ApplyRandomTranslation() const;
+			Asteroid();
+			Asteroid(AsteroidSize, Engine::Math::Vector2D);
+			void Render() override;
+			void Update(float deltaTime) override;
+			AsteroidSize getSize() const { return m_size; };
+			Engine::Math::Vector2D getPosition() const { return m_position; };
 
-			
-			AsteroidSize::Size GetSize() const { return m_size; };
+		protected:
+			void wrapAround() override;
+			void rotate(float num) override;
+			void translate(Engine::Math::Vector2D pos) override;
+
 		private:
-			void Generate();
-			void ApplyRandomImpulse() const;
-			std::vector<Engine::Math::Vector2> m_points;
-			Engine::Math::Vector2 m_velocity;
-			AsteroidSize::Size m_size;
-			int m_sizeFactor;
+
+			AsteroidSize m_size;
+			int sizeFactor;
+			void randomPoints();
+			void randomPos(float max, float min);
+			void randomAngle(float max, float min);
 		};
 	}
 }
 
-#endif // !_ASTEROID_H_
+#endif //!_H_Asteroid_

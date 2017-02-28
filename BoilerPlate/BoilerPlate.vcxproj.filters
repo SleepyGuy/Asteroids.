@@ -1,63 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="App.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="stb_image.c" />
+    <ClCompile Include="Utilities.cpp">
+      <Filter>Engine\Source files\FileSystem\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Game\Source Files\Utilities</Filter>
+    </ClCompile>
     <ClCompile Include="SDLEvent.cpp" />
     <ClCompile Include="TimeManager.cpp" />
-    <ClCompile Include="stb_image.c" />
-    <ClCompile Include="Configuration.cpp">
-      <Filter>Game\Source files\Utilities</Filter>
+    <ClCompile Include="Asteroid.cpp">
+      <Filter>Game\Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Entities.cpp">
+      <Filter>Game\Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Game\Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="App.cpp" />
     <ClCompile Include="Vector2.cpp">
       <Filter>Engine\Source files\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Utilities.cpp">
-      <Filter>Engine\Source files\FileSystem</Filter>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>Engine\Source files\Math</Filter>
     </ClCompile>
     <ClCompile Include="Ship.cpp">
-      <Filter>Game\Source files\Entities</Filter>
+      <Filter>Game\Source Files\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Game\Source files\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Drawable2D.cpp">
-      <Filter>Engine\Source files\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Asteroid.cpp">
-      <Filter>Game\Source files\Entities</Filter>
+    <ClCompile Include="Asteroids.cpp">
+      <Filter>Game\Source Files\Asteroids</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="App.hpp" />
+    <ClInclude Include="Utilities.h">
+      <Filter>Engine\Header files\FileSystem\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Game\Header Files\Utilities</Filter>
+    </ClInclude>
     <ClInclude Include="SDLEvent.hpp" />
     <ClInclude Include="TimeManager.hpp" />
-    <ClInclude Include="Configuration.hpp">
-      <Filter>Game\Header files\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Ship.hpp">
-      <Filter>Game\Header files\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2.hpp">
-      <Filter>Engine\Header files\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Utilities.hpp">
-      <Filter>Engine\Header files\FileSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.hpp">
-      <Filter>Game\Header files\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Constants.hpp">
-      <Filter>Engine\Header files\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Drawable2D.hpp">
-      <Filter>Engine\Header files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="MathUtilities.hpp">
-      <Filter>Engine\Header files\Math</Filter>
+    <ClInclude Include="Entities.h">
+      <Filter>Game\Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Asteroid.h">
-      <Filter>Game\Header files\Entities</Filter>
+      <Filter>Game\Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Game\Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="App.hpp" />
+    <ClInclude Include="MathUtilities.h">
+      <Filter>Engine\Header files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Engine\Header files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Engine\Header files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Ship.h">
+      <Filter>Game\Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="EPhysics.h">
+      <Filter>Game\Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Asteroids.h">
+      <Filter>Game\Header Files\Asteroids</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -70,44 +82,56 @@
     <Filter Include="Engine\Header files">
       <UniqueIdentifier>{da8cc683-e66e-46b9-be58-7d0e16e23f76}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game">
-      <UniqueIdentifier>{9f607ccb-5fe1-415d-9ec6-e187db05064c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Header files">
-      <UniqueIdentifier>{55d6e081-31db-45a5-8ca2-0a47fbcfdee1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Source files">
-      <UniqueIdentifier>{e53cc361-507a-41f6-a412-6114944ecccd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Header files\Utilities">
-      <UniqueIdentifier>{9a92224f-3c5c-41a1-bd56-b72686f4d0ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Source files\Utilities">
-      <UniqueIdentifier>{d2742712-8843-4a40-842d-e723620b8717}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Header files\Entities">
-      <UniqueIdentifier>{2d8f42a1-20b9-4947-a578-3683aa31ab27}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Source files\Entities">
-      <UniqueIdentifier>{50aa7be3-fb02-48a4-a21f-9c63d1d6b585}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Header files\Math">
-      <UniqueIdentifier>{515e5600-1a63-4140-ba05-3d2f37da13c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Source files\Math">
-      <UniqueIdentifier>{41cfde4c-af6e-4926-bc11-23a756b4189c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Header files\FileSystem">
-      <UniqueIdentifier>{c5b28a60-46b4-4649-894f-b995ff47697e}</UniqueIdentifier>
+      <UniqueIdentifier>{1dece13e-f029-40f7-af5e-2a611a4d03b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Header files\FileSystem\Utilities">
+      <UniqueIdentifier>{13d34522-f7eb-4919-97f2-9b6ac83fd2bd}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Source files\FileSystem">
-      <UniqueIdentifier>{16df6908-72ac-4e26-bb67-fa9956b31660}</UniqueIdentifier>
+      <UniqueIdentifier>{9cf0e4a2-7d3a-4ef1-84a8-0089d1fa016d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Header files\Graphics">
-      <UniqueIdentifier>{715782a7-7167-4f8a-b806-131a0f366470}</UniqueIdentifier>
+    <Filter Include="Game">
+      <UniqueIdentifier>{645ef11d-5e03-4b7b-afc2-1577024558d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Source files\Graphics">
-      <UniqueIdentifier>{cfca6528-d42b-4fb6-91a6-ba465a3751ad}</UniqueIdentifier>
+    <Filter Include="Game\Header Files">
+      <UniqueIdentifier>{7b602fbb-c8eb-46ab-8c84-446f20006e0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Source Files">
+      <UniqueIdentifier>{b60a2393-11ec-4a51-8285-c20a38612f0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Header Files\Entities">
+      <UniqueIdentifier>{49b12225-c4aa-4509-812c-b3f2fcd20be7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Source Files\Entities">
+      <UniqueIdentifier>{f009c89f-c70f-4394-ad95-e814a2e19781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source files\FileSystem\Utilities">
+      <UniqueIdentifier>{88a7b32b-bb8f-46e1-8377-83ae11c1305c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Header Files\Utilities">
+      <UniqueIdentifier>{66c01fe6-5389-46b7-acda-b785e19db008}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Source Files\Utilities">
+      <UniqueIdentifier>{a0c13573-782c-47da-a512-7ee38b323638}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source files\Math">
+      <UniqueIdentifier>{9e2d17e1-e009-402a-8ffd-52ebe8fb42ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Header files\Math">
+      <UniqueIdentifier>{9c665a1a-ecf1-4907-8a37-ec24d81c79b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Header Files\Physics">
+      <UniqueIdentifier>{4bc96340-f8b8-43f2-a4ed-3879a69cdcd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Header Files\Asteroids">
+      <UniqueIdentifier>{9c07107f-a07f-443d-9ee3-854e2b368efc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Source Files\Asteroids">
+      <UniqueIdentifier>{0dd7874b-a511-48c2-b2c7-43cc1ee00674}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ToDo.txt" />
   </ItemGroup>
 </Project>

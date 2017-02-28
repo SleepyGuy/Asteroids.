@@ -1,0 +1,59 @@
+To do #1: [DONE]
+
+- Develop func to list the files in the models folder			[DONE]
+- Add post build command to copy models folder into debug		[DONE]
+
+To do #2: [DONE]
+
+Load all the player models (ships) at the start of the game:
+	
+	- Make vector class to store points											[DONE]
+	- Make ship class to store a vector of 2D vector (if it is already made)	[DONE]
+	- Use list file func to read files											[DONE]
+	- Store each file content into a ship										[DONE]
+	- Store all ship models into "app"											[DONE]
+
+To do #3:
+
+Make the ship to move forward, backwards, left and right, and make binding to change between ship models:
+	
+	- Render models											[DONE]
+		*Make class to draw entities*						[DONE]
+	- Make keyboard input (WASD)							[DONE]
+	- Make binding to switch between ship models			[DONE]
+		*Use the class to draw entities*					[DONE]
+	- Make movement with keyboard events					[DONE]
+		*Make func to translate ship*						[DONE]
+		*Make const velocity*								[DONE]
+
+To do #4:
+
+Make ship rotation and limits (ships goes out screen and appear in the contrary side)
+
+	- Make rotation																						[DONE]
+		*Make initial angle when the ship is created													[DONE]
+		*Create use const rotating for all direction													[DONE]
+		*glRotatef(), is the one who makes the rotation (research)										[DONE]
+		*Angle offset is 90º, need to tranform into radians (research polar coordinates)				[DONE]
+	- Make limits
+		*Calculate borders or limits whatever															[DONE]
+		*Calculate inverted current position of the ship when it is entirely out of the view port		[DONE]
+		*Assign inverted position to current															[DONE]
+
+To do #5:
+
+		- Make game update func working by the fps
+		- Make ship impulse																				[DONE]
+		- Make ship drag																				[DONE]
+
+To do #6:
+		
+		- Implement enemies (asteroids)							[DONE]
+
+To do #7:
+		
+		- Implement collition
+			- Use polygons (circles)														[DONE]
+			- Si la suma de los dos radios al cuadrado es menor o igual						[DONE]
+			  que la raiz de x2-x1 al cuadrado mas y2-y1 al cuadrado todo 
+			  elevado al cuadrado, los circulos colisionan (formula)
