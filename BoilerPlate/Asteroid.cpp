@@ -22,13 +22,13 @@ namespace Asteroids
 			m_angleInRads = (m_angle + Asteroids::angle_offset) * (Engine::Math::PI / 180);
 
 			if (m_size == AsteroidSize::BIG)
-				m_radius = 40.f;
+				m_radius = 80.f;
 			
 			if (m_size == AsteroidSize::MEDIUM)
-				m_radius = 20.f;
+				m_radius = 40.f;
 
 			if (m_size == AsteroidSize::SMALL)
-				m_radius = 10.f;
+				m_radius = 20.f;
 
 			
 		}
@@ -42,11 +42,11 @@ namespace Asteroids
 			randomAngle(2, 24);
 			m_angleInRads = (m_angle + Asteroids::angle_offset) * (Engine::Math::PI / 180);
 
-			if (m_size == AsteroidSize::BIG) { m_radius = 40.f; m_mass = 1.f; };
+			if (m_size == AsteroidSize::BIG) { m_radius = 80.f; m_mass = 2.f; };
 
-			if (m_size == AsteroidSize::MEDIUM) { m_radius = 20.f; m_mass = 0.7f; };
+			if (m_size == AsteroidSize::MEDIUM) { m_radius = 40.f; m_mass = 1.2f; };
 
-			if (m_size == AsteroidSize::SMALL) { m_radius = 10.f; m_mass = 0.4f; };
+			if (m_size == AsteroidSize::SMALL) { m_radius = 20.f; m_mass = 0.8f; };
 
 			
 		};
@@ -131,9 +131,9 @@ namespace Asteroids
 			float min = MIN_SIZE / sizeFactor;
 			float max = MAX_SIZE / sizeFactor;
 
-			for (int idx = 0; idx < MAX_POINTS; ++idx)
+			for (int licount = 0; licount < MAX_POINTS; ++licount)
 			{
-				const float radians = (idx / static_cast<float>(MAX_POINTS)) * 2.0f * Engine::Math::PI;
+				const float radians = (licount / static_cast<float>(MAX_POINTS)) * 1.5f * Engine::Math::PI;
 				const float randDist = Engine::Math::RandomInRange<float>(min, max);
 
 				m_points.push_back(Engine::Math::Vector2D(sinf(radians) * randDist, cosf(radians) * randDist));
