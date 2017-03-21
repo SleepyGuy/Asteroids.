@@ -33,6 +33,7 @@
     <ClCompile Include="Asteroids.cpp">
       <Filter>Game\Source Files\Asteroids</Filter>
     </ClCompile>
+    <ClCompile Include="AABB.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utilities.h">
@@ -71,6 +72,7 @@
     <ClInclude Include="Asteroids.h">
       <Filter>Game\Header Files\Asteroids</Filter>
     </ClInclude>
+    <ClInclude Include="AABB.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

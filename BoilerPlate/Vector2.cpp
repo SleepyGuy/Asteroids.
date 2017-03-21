@@ -1,5 +1,5 @@
 #include "Vector2.h"
-
+#include "Entities.h"
 //
 #include <cmath>
 
@@ -148,6 +148,16 @@ namespace Engine
 			{
 				return false;
 			}
+		}
+
+		float Vector2D::GetX()
+		{
+			return m_x;
+		}
+
+		float Vector2D::GetY()
+		{
+			return m_y;
 		}
 
 		Vector2D operator*(float scaleUnit, const Vector2D & rhs)

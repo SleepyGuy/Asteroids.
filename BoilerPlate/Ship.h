@@ -35,9 +35,7 @@ namespace Asteroids
 			void setVelocity(Engine::Math::Vector2D v) { m_velocity = v; };
 			Engine::Math::Vector2D getPosition() const { return m_position; };
 			void deleteBullet(Bullet*);
-
 			std::vector<Bullet*> m_magazine;
-
 		protected:
 
 			void wrapAround() override;
@@ -54,6 +52,7 @@ namespace Asteroids
 			int m_respawnTime;
 			int m_usedBullets;
 			float m_currentSpeed;
+
 		};
 	}
 }

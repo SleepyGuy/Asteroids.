@@ -28,7 +28,8 @@ namespace Engine
 			bool operator!=(const Vector2D& rhs);
 			friend Vector2D operator*(float scaleUnit, const Vector2D& rhs);
 			friend Vector2D operator*(const Vector2D& lhs, float scaleUnit);
-			
+			float GetX();
+			float GetY();
 			
 			float m_x;
 			float m_y;

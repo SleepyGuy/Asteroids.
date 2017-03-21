@@ -5,6 +5,7 @@
 #include "SDL2\SDL_opengl.h"
 
 #include "MathUtilities.h"
+#include "AABB.h"
 #include "EPhysics.h"
 
 namespace Asteroids
@@ -79,8 +80,8 @@ namespace Asteroids
 			if (m_mass > 0)
 			{
 				float impulse = (Physics::THRUST / m_mass);
-				float x = impulse * std::cosf(m_angleInRads);
-				float y = impulse * std::sinf(m_angleInRads);
+				float x = impulse * std::cosf(90);
+				float y = impulse * std::sinf(90);
 			
 				current += Engine::Math::Vector2D(x, y);
 			}
@@ -142,7 +143,7 @@ namespace Asteroids
 
 		void Asteroid::randomPos(float Ymax, float Xmax) 
 		{
-			float x = Engine::Math::RandomInRange<float>(-Xmax, Xmax);
+			float x = Engine::Math::RandomInRange<float>(Xmax, -Xmax);
 			float y = Engine::Math::RandomInRange<float>(-Ymax, Ymax);
 
 			m_position.m_x = x;
