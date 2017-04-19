@@ -30,10 +30,10 @@
     <ClCompile Include="Ship.cpp">
       <Filter>Game\Source Files\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Asteroids.cpp">
-      <Filter>Game\Source Files\Asteroids</Filter>
-    </ClCompile>
     <ClCompile Include="AABB.cpp" />
+    <ClCompile Include="Asteroids.cpp">
+      <Filter>Game\Source Files\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utilities.h">
@@ -69,10 +69,10 @@
     <ClInclude Include="EPhysics.h">
       <Filter>Game\Header Files\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="Asteroids.h">
-      <Filter>Game\Header Files\Asteroids</Filter>
-    </ClInclude>
     <ClInclude Include="AABB.h" />
+    <ClInclude Include="Asteroids.h">
+      <Filter>Game\Header Files\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -126,14 +126,5 @@
     <Filter Include="Game\Header Files\Physics">
       <UniqueIdentifier>{4bc96340-f8b8-43f2-a4ed-3879a69cdcd8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Header Files\Asteroids">
-      <UniqueIdentifier>{9c07107f-a07f-443d-9ee3-854e2b368efc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Source Files\Asteroids">
-      <UniqueIdentifier>{0dd7874b-a511-48c2-b2c7-43cc1ee00674}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ToDo.txt" />
   </ItemGroup>
 </Project>

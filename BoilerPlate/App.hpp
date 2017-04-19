@@ -49,16 +49,17 @@ namespace Engine
 		void OnKeyDown						( SDL_KeyboardEvent keyBoardEvent ) override;
 		void OnKeyUp						( SDL_KeyboardEvent keyBoardEvent ) override;
 
-		int															m_width;
-		int															m_height;
-		int															m_nUpdates;
-		double														m_lastFrameTime;
-		std::string													m_title;
-		SDL_Window*													m_mainWindow;
-		SDL_GLContext												m_context;
-		GameState::State											m_state;
-		Engine::TimeManager*										m_timer;
-		Game::AsteroidsGame*										m_game;
+		int	m_width;
+		int	m_height;
+		int	m_nUpdates;
+		double m_lastFrameTime;
+		std::string	m_title;
+		SDL_Window*	m_mainWindow;
+		SDL_GLContext m_context;
+		GameState::State m_state;
+		Engine::TimeManager* m_timer;
+		Game::AsteroidsGame* m_game;
+		int m_lives = 10;
 	};
 }
 #endif /* GAME_HPP */

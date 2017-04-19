@@ -1,6 +1,6 @@
 #include "Asteroids.h"
-
 #include <algorithm>
+#include <iostream>
 
 namespace Game 
 {
@@ -41,16 +41,17 @@ namespace Game
 
 		return;
 	}
-
+	const float DESIRED_FRAME_RATE = 60.0f;
+	const float DESIRED_FRAME_TIME = 1.0f / DESIRED_FRAME_RATE;
 	void AsteroidsGame::Render()
 	{
 		
-		m_player[m_playerIndex]->Render();
-
 		
 		for (int i = 0; i < m_enemies.size(); i++)
 			m_enemies[i]->Render();
-		
+		m_player[m_playerIndex]->Render();
+		m_player[m_playerIndex]->DrawLives(m_lives);
+
 		return;
 	}
 
@@ -68,7 +69,9 @@ namespace Game
 				if (m_player[m_playerIndex]->isColliding(pAsteroid))
 				{
 					Asteroids::Entity::Asteroid::AsteroidSize currentSize = pAsteroid->getSize();
-
+					m_lives = m_lives - 1;
+					if (m_lives == 0)
+						std::cout << "GAME OVER!!!!!!!!!!!";
 					deleteEnemy(temp);
 					
 					createDebris(currentSize, m_player[m_playerIndex]->getPosition());
@@ -91,6 +94,7 @@ namespace Game
 						
 						createDebris(currentSize, currentPos);
 						bulletHit = true;
+					
 					}
 				}
 				if (bulletHit == true)
@@ -125,7 +129,7 @@ namespace Game
 
 	void AsteroidsGame::deleteEnemy(Asteroids::Entity::Asteroid* dEnemy) 
 	{
-		m_enemies.erase(
+		    m_enemies.erase(
 			remove(m_enemies.begin(), m_enemies.end(), dEnemy), m_enemies.end()
 		);
 		delete dEnemy;

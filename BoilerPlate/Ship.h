@@ -24,6 +24,8 @@ namespace Asteroids
 
 			Ship(std::vector<Engine::Math::Vector2D> model_points);
 			void Render() override;
+		    virtual void RenderLives(unsigned int mode, std::vector<Engine::Math::Vector2D> points, int factor);
+			void DrawLives(int lives);
 			void MoveForward();
 			void MoveRight();
 			void MoveLeft();

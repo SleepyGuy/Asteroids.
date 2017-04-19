@@ -24,17 +24,18 @@ namespace Game
 		void Update(float fps);
 		void Render();
 
-		std::vector<Asteroids::Entity::Ship*>				m_player;
-		int													m_playerIndex;
-		std::vector<Asteroids::Entity::Asteroid*>			m_enemies;
+		std::vector<Asteroids::Entity::Ship*>m_player;
+		int	m_playerIndex;
+		std::vector<Asteroids::Entity::Asteroid*> m_enemies;
 
 	private:
-		int								m_WIDTH;
-		int								m_HEIGHT;
+		int	m_WIDTH;
+		int	m_HEIGHT;
 		void checkCollitions();
 		void deleteEnemy(Asteroids::Entity::Asteroid*);
 		void createDebris(Asteroids::Entity::Asteroid::AsteroidSize size, Engine::Math::Vector2D pos);
 		void createEnemy(int, Asteroids::Entity::Asteroid::AsteroidSize, Engine::Math::Vector2D);
+		int m_lives = 10;
 	};
 }
 

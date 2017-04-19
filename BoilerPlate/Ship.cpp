@@ -1,15 +1,7 @@
 #include "Ship.h"
-
-//OpenGL includes
 #include "SDL2\SDL_opengl.h"
-
-//STD
 #include <cmath>
-
-//
 #include <algorithm>
-
-//
 #include "EPhysics.h"
 
 
@@ -17,6 +9,7 @@ namespace Asteroids
 {
 	namespace Entity
 	{
+		int m_lives = 10;
 		Ship::Ship(std::vector<Engine::Math::Vector2D> model_points)
 			: m_velocity()
 			, m_usedBullets(0)
@@ -70,6 +63,23 @@ namespace Asteroids
 
 
 			return;
+		}
+		void Ship::RenderLives(unsigned int mode, std::vector<Engine::Math::Vector2D> points, int factor)
+		{
+			glLoadIdentity();
+			glTranslatef(650.0f - (factor * 60), 330.0f, 0.0f);
+			glBegin(mode);
+			for (auto point : points)
+			{
+				glVertex2f(point.GetX(), point.GetY());
+			}
+			glEnd();
+		}
+		void Ship::DrawLives(int lives)
+		{
+			Entity::Ship::translate(m_position);
+			for (int i = 0; i<lives; i++)
+				 Entity::Ship::RenderLives(GL_LINE_LOOP, m_points, i);
 		}
 
 		void Ship::MoveForward()

@@ -11,6 +11,7 @@
 #include "App.hpp"
 #include "Utilities.h"
 
+
 const int WIDTH = 1270;
 const int HEIGHT = 720;
 
@@ -43,6 +44,5 @@ int main(int argc, char* argv[])
 	// Delete game object
 	//
 	delete app;
-
 	return 0;
 }
