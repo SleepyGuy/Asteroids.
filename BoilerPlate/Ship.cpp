@@ -67,7 +67,7 @@ namespace Asteroids
 		void Ship::RenderLives(unsigned int mode, std::vector<Engine::Math::Vector2D> points, int factor)
 		{
 			glLoadIdentity();
-			glTranslatef(650.0f - (factor * 60), 330.0f, 0.0f);
+			glTranslatef(260.0f - (factor * 60), 300.0f, 0.0f);
 			glBegin(mode);
 			for (auto point : points)
 			{

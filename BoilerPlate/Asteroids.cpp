@@ -1,6 +1,10 @@
 #include "Asteroids.h"
 #include <algorithm>
 #include <iostream>
+#include "Entities.h"
+#include <stdio.h>
+#include <windows.h>
+#include <cstdlib>
 
 namespace Game 
 {
@@ -69,9 +73,15 @@ namespace Game
 				if (m_player[m_playerIndex]->isColliding(pAsteroid))
 				{
 					Asteroids::Entity::Asteroid::AsteroidSize currentSize = pAsteroid->getSize();
+					//
 					m_lives = m_lives - 1;
 					if (m_lives == 0)
-						std::cout << "GAME OVER!!!!!!!!!!!";
+					{
+			        	std::cout << "GAME OVER!!!!!!!!!!!\n";
+						std::cout << "\nYoure Score is " << score;
+						exit(1);
+					}
+				   //
 					deleteEnemy(temp);
 					
 					createDebris(currentSize, m_player[m_playerIndex]->getPosition());
@@ -98,7 +108,10 @@ namespace Game
 					}
 				}
 				if (bulletHit == true)
+				{
 					break;
+				}
+
 			}
 		}
 		return;

@@ -94,19 +94,19 @@ namespace Engine
 		switch (keyBoardEvent.keysym.scancode)
 		{
 		case SDL_SCANCODE_W:
-			std::cout << "Moving Forward "<< std::endl;
+			//std::cout << "Moving Forward "<< std::endl;
 			m_game->m_player[m_game->m_playerIndex]->MoveForward();
 			break;
 		case SDL_SCANCODE_A:
-			std::cout << "Moving Left " << std::endl;
+			//std::cout << "Moving Left " << std::endl;
 			m_game->m_player[m_game->m_playerIndex]->MoveLeft();
 			break;
 		case SDL_SCANCODE_S:
-			std::cout << "Moving Down " << std::endl;
+			//std::cout << "Moving Down " << std::endl;
 			//NOTHING
 			break;
 		case SDL_SCANCODE_D:
-			std::cout << "Moving Right " << std::endl;
+			//std::cout << "Moving Right " << std::endl;
 			m_game->m_player[m_game->m_playerIndex]->MoveRight();
 			break;
 		case SDL_SCANCODE_UP:

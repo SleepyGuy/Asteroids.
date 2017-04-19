@@ -27,7 +27,7 @@ namespace Asteroids
 
 			glTranslatef(m_position.m_x, m_position.m_y, 0.f);
 
-			glColor3f(1, 0, 0);
+			glColor3f(1, 1, 1);
 
 			glLoadIdentity();
 

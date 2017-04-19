@@ -35,7 +35,8 @@ namespace Game
 		void deleteEnemy(Asteroids::Entity::Asteroid*);
 		void createDebris(Asteroids::Entity::Asteroid::AsteroidSize size, Engine::Math::Vector2D pos);
 		void createEnemy(int, Asteroids::Entity::Asteroid::AsteroidSize, Engine::Math::Vector2D);
-		int m_lives = 10;
+		int m_lives = 11;
+		int score = 0;
 	};
 }
 
