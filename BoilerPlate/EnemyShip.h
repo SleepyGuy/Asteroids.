@@ -11,4 +11,6 @@ public :
 	void Render() override;
 	void Update(float deltaTime) override;
 	void GeneratePoints();
+	float x;
+	Vector2D Position;
 };

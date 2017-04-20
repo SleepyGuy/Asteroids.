@@ -47,13 +47,13 @@ namespace Asteroids
 		private:
 			void Mass();
 			void ResetOrientation();
-
+			float m_currentSpeed;
 			Engine::Math::Vector2D m_velocity;
 			bool m_inmune;
 			Engine::Math::Vector3D m_currentColor;
 			int m_respawnTime;
 			int m_usedBullets;
-			float m_currentSpeed;
+			;
 
 		};
 	}

@@ -44,6 +44,8 @@ namespace Game
 		for (int i = 0; i < m_enemies.size(); i++)
 			m_enemies.at(i)->Update(fps);
 
+		m_enemyship->Update(fps);
+
 		checkCollitions();
 
 		return;

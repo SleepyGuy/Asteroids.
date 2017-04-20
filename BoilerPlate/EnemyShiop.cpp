@@ -1,9 +1,14 @@
 #include "EnemyShip.h"
 #include <SDL2\SDL_opengl.h>
 #include "Entities.h"
+#include "EPhysics.h"
+#include "Ship.h"
+#include <algorithm>
 EnemyShip::EnemyShip()
 {
 	GeneratePoints();
+	x = -450;
+	Position = Vector2D(-400, -75);
 }
 
 void EnemyShip::Render()
@@ -11,11 +16,11 @@ void EnemyShip::Render()
 	glLoadIdentity();
 
 	
-	glTranslatef(-450, -75, 0.0f);
+	glTranslatef(Position.GetX(), Position.GetY(), 0.0f);
 
-	glRotatef(m_angle, 0.0f, 0.0f, 1.0f);
+	glRotatef(0, 0.0f, 0.0f, 0.0f);
 
-	glColor3f(3, 0, 1);
+	glColor3f(1, 0, 0);
 
 	glBegin(GL_LINE_LOOP);
 	for (auto temp : m_points)
@@ -27,17 +32,10 @@ void EnemyShip::Render()
 
 void EnemyShip::Update(float deltaTime)
 {
-	Engine::Math::Vector2D current;
-	if (m_mass > 0)
-	{
-		float impulse = (2.0f / m_mass);
-		float x = impulse * std::cosf(180);
-		float y = impulse * std::sinf(90);
-
-		current += Engine::Math::Vector2D(x, y);
-	}
-	current += m_position;
-	translate(current);
+	x += 0.015f;
+	float y = 2 * (cosf(x) * (270 / PI));
+	Position = Vector2D(x, y);
+	
 }
 
 void EnemyShip::GeneratePoints()
