@@ -9,7 +9,7 @@ namespace Asteroids
 {
 	namespace Entity
 	{
-		int m_lives = 10;
+		
 		Ship::Ship(std::vector<Engine::Math::Vector2D> model_points)
 			: m_velocity()
 			, m_usedBullets(0)
