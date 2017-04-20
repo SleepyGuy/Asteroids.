@@ -10,6 +10,7 @@
 #include "Ship.h"
 #include "Asteroid.h"
 #include "Utils.h"
+#include "EnemyShip.h"
 
 namespace Game 
 {
@@ -35,8 +36,10 @@ namespace Game
 		void deleteEnemy(Asteroids::Entity::Asteroid*);
 		void createDebris(Asteroids::Entity::Asteroid::AsteroidSize size, Engine::Math::Vector2D pos);
 		void createEnemy(int, Asteroids::Entity::Asteroid::AsteroidSize, Engine::Math::Vector2D);
+		void Score(Asteroids::Entity::Asteroid::AsteroidSize size);
 		int m_lives = 11;
-		int score = 0;
+		int score;
+		EnemyShip* m_enemyship;
 	};
 }
 

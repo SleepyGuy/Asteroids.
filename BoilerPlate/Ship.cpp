@@ -37,7 +37,6 @@ namespace Asteroids
 				m_respawnTime++;
 			}
 
-			
 			glLoadIdentity();
 
 			wrapAround();

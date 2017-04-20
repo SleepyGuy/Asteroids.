@@ -13,6 +13,7 @@
 
 //
 #include "Asteroids.h"
+#include "EnemyShip.h"
 
 namespace Engine
 {
@@ -39,6 +40,7 @@ namespace Engine
 		bool Init							( );
 		void Update							( );
 		void Render							( );
+		
 	private:
 		bool SDLInit						( );
 		bool GlewInit						( );
@@ -56,10 +58,13 @@ namespace Engine
 		std::string	m_title;
 		SDL_Window*	m_mainWindow;
 		SDL_GLContext m_context;
-		GameState::State m_state;
+	    GameState::State m_state;
 		Engine::TimeManager* m_timer;
 		Game::AsteroidsGame* m_game;
+		
+
 		int m_lives = 10;
+		
 	};
 }
 #endif /* GAME_HPP */

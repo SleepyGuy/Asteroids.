@@ -14,6 +14,7 @@ namespace Engine
 	const float DESIRED_FRAME_RATE = 60.0f;
 	const float DESIRED_FRAME_TIME = 1.0f / DESIRED_FRAME_RATE;
 	bool stop = true;
+    
 
 	App::App(const std::string& title, const int width, const int height)
 		: m_title(title)
@@ -118,7 +119,7 @@ namespace Engine
 		case SDL_SCANCODE_DOWN:
 			break;
 		case SDL_SCANCODE_SPACE:
-			std::cout << "Shoting " << std::endl;
+			//std::cout << "Shoting " << std::endl;
 			m_game->m_player[m_game->m_playerIndex]->Shoot();
 			break;
 		case SDL_SCANCODE_P:

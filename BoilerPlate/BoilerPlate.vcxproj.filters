@@ -34,6 +34,7 @@
     <ClCompile Include="Asteroids.cpp">
       <Filter>Game\Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyShiop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Utilities.h">
@@ -71,6 +72,9 @@
     </ClInclude>
     <ClInclude Include="AABB.h" />
     <ClInclude Include="Asteroids.h">
+      <Filter>Game\Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyShip.h">
       <Filter>Game\Header Files\Entities</Filter>
     </ClInclude>
   </ItemGroup>

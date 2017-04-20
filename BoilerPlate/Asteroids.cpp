@@ -11,7 +11,8 @@ namespace Game
 	AsteroidsGame::AsteroidsGame(int WIDTH, int HEIGHT)
 		: m_WIDTH(WIDTH)
 		, m_HEIGHT(HEIGHT)
-		, m_playerIndex(0)
+		, m_playerIndex(0),
+		score(0)
 	{}
 
 	AsteroidsGame::~AsteroidsGame() 
@@ -30,6 +31,8 @@ namespace Game
 		m_player = config.LoadModels();
 
 		createEnemy(3, Asteroids::Entity::Asteroid::AsteroidSize::BIG, null);
+
+		m_enemyship = new EnemyShip();
 
 		return;
 	}
@@ -55,6 +58,7 @@ namespace Game
 			m_enemies[i]->Render();
 		m_player[m_playerIndex]->Render();
 		m_player[m_playerIndex]->DrawLives(m_lives);
+		this->m_enemyship->Render();
 
 		return;
 	}
@@ -77,8 +81,10 @@ namespace Game
 					m_lives = m_lives - 1;
 					if (m_lives == 0)
 					{
-			        	std::cout << "GAME OVER!!!!!!!!!!!\n";
+						std::cout << "GAME OVER!!!!!!!!!!!\n";
 						std::cout << "\nYoure Score is " << score;
+						std::cout << "\n";
+						std::cout << "\n";
 						exit(1);
 					}
 				   //
@@ -97,6 +103,8 @@ namespace Game
 						
 						Asteroids::Entity::Asteroid::AsteroidSize currentSize = pAsteroid->getSize();
 						Engine::Math::Vector2D currentPos = pAsteroid->getPosition();
+
+						Score(currentSize);
 
 						deleteEnemy(temp);
 
@@ -138,6 +146,22 @@ namespace Game
 			}
 		}
 
+	}
+
+	void AsteroidsGame::Score(Asteroids::Entity::Asteroid::AsteroidSize size)
+	{
+		if (size == Asteroids::Entity::Asteroid::AsteroidSize::BIG) 
+		{
+			score += 100;
+		}
+		else if (size == Asteroids::Entity::Asteroid::AsteroidSize::MEDIUM) 
+		{
+			score += 50;
+		}
+		else
+		{
+			score += 25;
+		}
 	}
 
 	void AsteroidsGame::deleteEnemy(Asteroids::Entity::Asteroid* dEnemy) 
